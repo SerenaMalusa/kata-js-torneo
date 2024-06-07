@@ -76,11 +76,11 @@ for (let i = 0; i < winners.length; i++) {
 // create a new array that will contain the best 3 winners
 const podium = [];
 
-// cicle 3 times
-for (let i = 1; i <= 3; i++) {
+// cicle until podium has 3 elements
+while (podium.length < 3) {
   // start with the first element of the winner array
   let medal = winners[0];
-  // confront each winner strenght and find the bigger one (if they are equal then the medal wins)
+  // confront each winner strenght and find the biggest one (if they are equal then the medal wins)
   winners.forEach((winner) => {
     if (totalPower(winner) > totalPower(medal)) {
       medal = winner;
@@ -92,4 +92,5 @@ for (let i = 1; i <= 3; i++) {
   podium.push(medal);
   winners.splice(winners.indexOf(medal), 1);
 }
+
 console.table(podium);
