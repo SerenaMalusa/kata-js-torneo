@@ -22,5 +22,22 @@ function randomElement(array) {
  * @returns
  */
 function totalPower(fighter) {
-  return fighter.power + fighter.weapon.power;
+  // if the fighter is armed sum his strenght to the strenght of the weapon
+  let totalPower = fighter.weapon
+    ? fighter.power + fighter.weapon.power
+    : fighter.power;
+  return totalPower;
+}
+
+/**
+ * multiply the fighters power for a random number
+ * @param {array} fighters
+ */
+function trainFighters(fighters) {
+  fighters.forEach(
+    // the fighter power gets multiplied for a random number between 1 and 100
+    (fighter) => (fighter.power = fighter.power * randomNum(100, 1))
+  );
+  console.log("I partecipanti si sono allenati!");
+  console.table(fighters);
 }

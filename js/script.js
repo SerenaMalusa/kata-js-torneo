@@ -25,72 +25,94 @@ let armedFighters = fighters.map((fighter) => {
   };
 });
 
-// console.log("fighters");
-// console.table(fighters);
-// console.log("armedFighters");
-// console.table(armedFighters);
-// console.log(weapons);
-// console.log(updatedWeapons);
+console.log("Tutti i partecipanti hanno scelto un' arma!");
+console.table(armedFighters);
 
-// every fighter trains to try to improve his power
-armedFighters.forEach(
-  // the fighter power gets multiplied for a random number between 1 and 100
-  (fighter) => (fighter.power = fighter.power * randomNum(100, 1))
-);
-// console.table(armedFighters);
+// afeter 10 seconds: every fighter trains to try to improve his power
+setTimeout(trainFighters, 1000 * 10, armedFighters);
 
-// remove the fighters whose strenght is less than 2000
-armedFighters.filter((fighter) => fighter.power >= 2000);
-// console.table(armedFighters);
+let approvedFighters = [];
+// after 20 seconds
+setTimeout(() => {
+  // remove the fighters whose strenght is less than 2000
+  approvedFighters = armedFighters.filter((fighter) => fighter.power >= 2000);
+  //   console.table(approvedFighters);
+  console.log("Ecco i partecipanti approvati:");
 
-// if the fighter numbers is odd
-if (armedFighters.length % 2 != 0)
-  // add a new fighter called Robot to even the number
-  armedFighters.push({
-    name: "Robot",
-    power: 4000,
-  });
-// console.table(armedFighters);
+  // if the fighter numbers is odd
+  if (approvedFighters.length % 2 != 0) {
+    // add a new fighter called Robot to even the number
+    approvedFighters.push({
+      name: "Robot",
+      power: 4000,
+    });
+    console.log(
+      "(e' stato aggiunto un combattente robot per rendere pari il numero dei partecipanti.)"
+    );
+  }
 
-// copy the armedFighters in a new array that will contain winners only
-const winners = [...armedFighters];
+  console.table(approvedFighters);
+}, 1000 * 20);
 
-// cicle all the fighters for combats
-for (let i = 0; i < winners.length; i++) {
-  // set the fighter and the opponent
-  const fighter = winners[i];
-  const opponent = winners[i + 1];
-  // if there is no opponent (aka we are at the end of the array) break the cycle
-  if (!opponent) break;
-  console.log(fighter, opponent);
+// set a new array that will contain winners onlys
+let winners = [];
 
-  // the combat is won by the fighter with bigger total power (if they are equal then the fighter wins)
-  const loser =
-    totalPower(opponent) <= totalPower(fighter) ? opponent : fighter;
-  console.log(loser);
-  // remove the loser from the array
-  winners.splice(winners.indexOf(loser), 1);
-  console.table(winners);
-}
+// afert 30 seconds
+setTimeout(function () {
+  // copy the armedFighters in the winners array
+  winners = [...approvedFighters];
+
+  // cycle all the fighters for combats
+  for (let i = 0; i < winners.length; i++) {
+    console.log(`Comabttimento n${i + 1}:`);
+
+    // set the fighter and the opponent
+    const fighter = winners[i];
+    const opponent = winners[i + 1];
+    // if there is no opponent (aka we are at the end of the array) break the cycle
+    if (!opponent) break;
+    //   console.log(fighter, opponent);
+
+    // the combat is won by the fighter with bigger total power (if they are equal then the fighter wins)
+    const loser =
+      totalPower(opponent) <= totalPower(fighter) ? opponent : fighter;
+    //   console.log(loser);
+    // remove the loser from the array
+    winners.splice(winners.indexOf(loser), 1);
+    //   console.table(winners);
+
+    const winner = loser == opponent ? fighter : opponent;
+    console.log(
+      `${fighter.name}(forza totale: ${totalPower(fighter)}) vs ${
+        opponent.name
+      }(forza totale: ${totalPower(opponent)})`
+    );
+    console.log(`Il vincitore è ${winner.name}!`);
+  }
+}, 1000 * 30);
 
 // create a new array that will contain the best 3 winners
 const podium = [];
 
-// cicle until podium has 3 elements
-while (podium.length < 3) {
-  // start with the first element of the winner array
-  let medal = winners[0];
-  // confront each winner strenght and find the biggest one (if they are equal then the medal wins)
-  winners.forEach((winner) => {
-    if (totalPower(winner) > totalPower(medal)) {
-      medal = winner;
-    }
-  });
-  // console.log(medal);
+// after 40 seconds
+setTimeout(() => {
+  // cycle until podium has 3 elements
+  while (podium.length < 3) {
+    // start with the first element of the winner array
+    let medal = winners[0];
+    // confront each winner strenght and find the biggest one (if they are equal then the medal wins)
+    winners.forEach((winner) => {
+      if (totalPower(winner) > totalPower(medal)) {
+        medal = winner;
+      }
+    });
+    // console.log(medal);
 
-  // put the medalis on the podium and remove it from the list so it can't be counted later
-  podium.push(medal);
-  winners.splice(winners.indexOf(medal), 1);
-}
+    // put the medalist on the podium and remove it from the list so it can't be counted later
+    podium.push(medal);
+    winners.splice(winners.indexOf(medal), 1);
+  }
 
-console.table(podium);
+  console.log("Ecco il podio con i 3 migliori combattenti:");
+  console.table(podium);
+}, 1000 * 40);
