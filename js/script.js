@@ -63,7 +63,7 @@ for (let i = 0; i < winners.length; i++) {
   if (!opponent) break;
   console.log(fighter, opponent);
 
-  // the combat is won by the fighter with bigger total power
+  // the combat is won by the fighter with bigger total power (if they are equal then the fighter wins)
   const loser =
     totalPower(opponent) <= totalPower(fighter) ? opponent : fighter;
   console.log(loser);
@@ -71,3 +71,24 @@ for (let i = 0; i < winners.length; i++) {
   winners.splice(winners.indexOf(loser), 1);
   console.table(winners);
 }
+
+// create a new array that will contain the best 3 winners
+const podium = [];
+
+// cicle 3 times
+for (let i = 1; i <= 3; i++) {
+  // start with the first element of the winner array
+  let medal = winners[0];
+  // confront each winner strenght and find the bigger one (if they are equal then the medal wins)
+  winners.forEach((winner) => {
+    if (totalPower(winner) > totalPower(medal)) {
+      medal = winner;
+    }
+  });
+  // console.log(medal);
+
+  // put the medalis on the podium and remove it from the list so it can't be counted later
+  podium.push(medal);
+  winners.splice(winners.indexOf(medal), 1);
+}
+console.table(podium);
