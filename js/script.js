@@ -13,9 +13,16 @@ const armedFighters = fighters.map((fighter) => {
   return { ...fighter, weapon: chosenWeapon };
 });
 
-console.log("fighters");
-console.table(fighters);
+// console.log("fighters");
+// console.table(fighters);
 console.log("armedFighters");
 console.table(armedFighters);
-console.log(weapons);
-console.log(updatedWeapons);
+// console.log(weapons);
+// console.log(updatedWeapons);
+
+// every fighter trains to try to improve his power
+armedFighters.forEach(
+  // the fighter power gets multiplied for a random number between 1 and 100
+  (fighter) => (fighter.power = fighter.power * randomNum(100, 1))
+);
+console.table(armedFighters);
