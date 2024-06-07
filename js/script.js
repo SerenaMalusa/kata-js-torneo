@@ -34,7 +34,16 @@ armedFighters.forEach(
   // the fighter power gets multiplied for a random number between 1 and 100
   (fighter) => (fighter.power = fighter.power * randomNum(100, 1))
 );
-console.table(armedFighters);
+// console.table(armedFighters);
 
 armedFighters = armedFighters.filter((fighter) => fighter.power >= 2000);
+console.table(armedFighters);
+
+// if the fighter numbers is odd
+if (armedFighters.length % 2 != 0)
+  // add a new fighter called Robot to even the number
+  armedFighters.push({
+    name: "Robot",
+    power: 4000,
+  });
 console.table(armedFighters);
