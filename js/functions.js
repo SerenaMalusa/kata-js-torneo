@@ -38,6 +38,6 @@ function trainFighters(fighters) {
     // the fighter power gets multiplied for a random number between 1 and 100
     (fighter) => (fighter.power = fighter.power * randomNum(100, 1))
   );
-  console.log("I partecipanti si sono allenati!");
+  console.log("Gli aspiranti partecipanti si sono allenati!");
   console.table(fighters);
 }
