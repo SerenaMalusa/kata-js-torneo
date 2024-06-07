@@ -131,8 +131,6 @@ setTimeout(function () {
 
     // cycle all the fighters for combats
     for (let i = 0; i < winners.length; i++) {
-      console.log(`------ Comabttimento n${i + 1} ------`);
-
       // set the fighter and the opponent
       const fighter = winners[i];
       const opponent = winners[i + 1];
@@ -147,6 +145,8 @@ setTimeout(function () {
       //   console.table(winners);
 
       const winner = loser == opponent ? fighter : opponent;
+
+      console.log(`------ Comabttimento n${i + 1} ------`);
       console.log(
         `${fighter.name}(forza totale: ${totalPower(fighter)}) vs ${
           opponent.name
