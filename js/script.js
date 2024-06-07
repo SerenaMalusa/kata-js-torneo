@@ -19,7 +19,10 @@ let armedFighters = fighters.map((fighter) => {
   //   console.table(updatedWeapons);
 
   // resituisco al nuovo array copia dell'oggetto fighter, aggiungendo la chiave weapon
-  return { ...fighter, weapon: chosenWeapon };
+  return {
+    ...fighter,
+    weapon: chosenWeapon,
+  };
 });
 
 // console.log("fighters");
@@ -36,8 +39,8 @@ armedFighters.forEach(
 );
 // console.table(armedFighters);
 
-armedFighters = armedFighters.filter((fighter) => fighter.power >= 2000);
-console.table(armedFighters);
+armedFighters.filter((fighter) => fighter.power >= 2000);
+// console.table(armedFighters);
 
 // if the fighter numbers is odd
 if (armedFighters.length % 2 != 0)
@@ -46,4 +49,25 @@ if (armedFighters.length % 2 != 0)
     name: "Robot",
     power: 4000,
   });
-console.table(armedFighters);
+// console.table(armedFighters);
+
+// copy the armedFighters in a new array that will contain winners only
+const winners = [...armedFighters];
+
+// cicle all the fighters for combats
+for (let i = 0; i < winners.length; i++) {
+  // set the fighter and the opponent
+  const fighter = winners[i];
+  const opponent = winners[i + 1];
+  // if there is no opponent (aka we are at the end of the array) break the cycle
+  if (!opponent) break;
+  console.log(fighter, opponent);
+
+  // the combat is won by the fighter with bigger total power
+  const loser =
+    totalPower(opponent) <= totalPower(fighter) ? opponent : fighter;
+  console.log(loser);
+  // remove the loser from the array
+  winners.splice(winners.indexOf(loser), 1);
+  console.table(winners);
+}

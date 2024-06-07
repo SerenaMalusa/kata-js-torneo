@@ -15,3 +15,12 @@ function randomNum(max, min = 0) {
 function randomElement(array) {
   return array[randomNum(array.length)];
 }
+
+/**
+ * return the total power of the fighter (power + weapon power)
+ * @param {object} fighter
+ * @returns
+ */
+function totalPower(fighter) {
+  return fighter.power + fighter.weapon.power;
+}
