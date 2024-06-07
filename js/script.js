@@ -39,6 +39,7 @@ armedFighters.forEach(
 );
 // console.table(armedFighters);
 
+// remove the fighters whose strenght is less than 2000
 armedFighters.filter((fighter) => fighter.power >= 2000);
 // console.table(armedFighters);
 
